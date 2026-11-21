@@ -38,13 +38,16 @@ namespace KCH.Products.Domain
         private void SetDetails(string? itemCode, string itemDescription, ProductCondition condition, decimal sellingPrice, decimal unitCost)
         {
             if (string.IsNullOrWhiteSpace(itemDescription)) throw new DomainException("Item description is required.");
-            if (itemDescription.Length > DescriptionMaxLength) throw new DomainException($"Item description cannot exceed {DescriptionMaxLength} characters.");
+
+            var description = itemDescription.Trim();
+            if (description.Length > DescriptionMaxLength) throw new DomainException($"Item description cannot exceed {DescriptionMaxLength} characters.");
+
             if (!Enum.IsDefined(condition)) throw new DomainException("Invalid condition.");
             if (sellingPrice < 0) throw new DomainException("Selling price cannot be negative.");
             if (unitCost < 0) throw new DomainException("Unit cost cannot be negative.");
 
             SetItemCode(itemCode);
-            ItemDescription = itemDescription.Trim();
+            ItemDescription = description;
             Condition = condition;
             SellingPrice = sellingPrice;
             UnitCost = unitCost;
@@ -52,15 +55,16 @@ namespace KCH.Products.Domain
 
         private void SetItemCode(string? itemCode)
         {
-            if (string.IsNullOrWhiteSpace(ItemCode))
+            if (string.IsNullOrWhiteSpace(itemCode))
             {
                 ItemCode = null;
                 return;
             }
 
-            if (ItemCode.Length > ItemCodeMaxLength) throw new DomainException($"Item code cannot exceed {ItemCodeMaxLength} characters.");
+            var code = itemCode.Trim();
+            if (code.Length > ItemCodeMaxLength) throw new DomainException($"Item code cannot exceed {ItemCodeMaxLength} characters.");
 
-            ItemCode = itemCode.Trim().ToUpperInvariant();
+            ItemCode = code.ToUpperInvariant();
         }
     }
 }
