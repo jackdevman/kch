@@ -2,5 +2,7 @@
   <Folder Name="/src/">
     <Project Path="KCH.Products.Domain/KCH.Products.Domain.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="KCH.Products.Domain.Tests/KCH.Products.Domain.Tests.csproj" />
+  </Folder>
 </Solution>
