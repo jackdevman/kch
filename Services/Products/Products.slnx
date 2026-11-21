@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="KCH.Products.Domain/KCH.Products.Domain.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
